@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class BaseResponse<T> {
 
-    @SerializedName("data")
-    private ResultsResponse<T> data;
+	@SerializedName("data")
+	private ResultsResponse<T> data;
 
-    public ResultsResponse<T> getData() {
-        return data;
-    }
+	public ResultsResponse<T> getData() {
+		return data;
+	}
 }

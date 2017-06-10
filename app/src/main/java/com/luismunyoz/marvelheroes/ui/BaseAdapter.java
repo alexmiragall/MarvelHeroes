@@ -12,25 +12,25 @@ import android.view.ViewGroup;
 
 public abstract class BaseAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, viewType, parent, false);
-        return new MyViewHolder(binding);
-    }
+	public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+		LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+		ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, viewType, parent, false);
+		return new MyViewHolder(binding);
+	}
 
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Object item = getItemForPosition(position);
-        holder.bind(item, getListener());
-    }
+	public void onBindViewHolder(MyViewHolder holder, int position) {
+		Object item = getItemForPosition(position);
+		holder.bind(item, getListener());
+	}
 
-    @Override
-    public int getItemViewType(int position) {
-        return getLayoutIdForPosition(position);
-    }
+	@Override
+	public int getItemViewType(int position) {
+		return getLayoutIdForPosition(position);
+	}
 
-    protected abstract Object getItemForPosition(int position);
+	protected abstract Object getItemForPosition(int position);
 
-    protected abstract Object getListener();
+	protected abstract Object getListener();
 
-    protected abstract int getLayoutIdForPosition(int position);
+	protected abstract int getLayoutIdForPosition(int position);
 }

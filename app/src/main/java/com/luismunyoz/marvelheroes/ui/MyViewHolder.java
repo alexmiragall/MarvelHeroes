@@ -16,33 +16,33 @@ import com.luismunyoz.marvelheroes.BR;
  */
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
-    private final ViewDataBinding binding;
+	private final ViewDataBinding binding;
 
-    public MyViewHolder(ViewDataBinding binding) {
-        super(binding.getRoot());
-        this.binding = binding;
-    }
+	public MyViewHolder(ViewDataBinding binding) {
+		super(binding.getRoot());
+		this.binding = binding;
+	}
 
-    public void bind(Object item, Object listener) {
-        binding.setVariable(BR.item, item);
-        binding.setVariable(BR.listener, listener);
-        binding.executePendingBindings();
-    }
+	public void bind(Object item, Object listener) {
+		binding.setVariable(BR.item, item);
+		binding.setVariable(BR.listener, listener);
+		binding.executePendingBindings();
+	}
 
-    @BindingAdapter("app:srcCompat")
-    public static void setImage(ImageView imageView, int resourceId) {
-        Drawable drawable = VectorDrawableCompat.create(imageView.getResources(), resourceId, imageView.getContext().getTheme());
-        imageView.setImageDrawable(drawable);
-    }
+	@BindingAdapter("app:srcCompat")
+	public static void setImage(ImageView imageView, int resourceId) {
+		Drawable drawable = VectorDrawableCompat.create(imageView.getResources(), resourceId, imageView.getContext().getTheme());
+		imageView.setImageDrawable(drawable);
+	}
 
-    @BindingAdapter("app:srcCompat")
-    public static void setImage(ImageView imageView, Drawable drawable) {
-        imageView.setImageDrawable(drawable);
-    }
+	@BindingAdapter("app:srcCompat")
+	public static void setImage(ImageView imageView, Drawable drawable) {
+		imageView.setImageDrawable(drawable);
+	}
 
-    @BindingAdapter("imageUrl")
-    public static void setImageUrl(ImageView imageView, String url) {
-        Context context = imageView.getContext();
-        Glide.with(context).load(url).into(imageView);
-    }
+	@BindingAdapter("imageUrl")
+	public static void setImageUrl(ImageView imageView, String url) {
+		Context context = imageView.getContext();
+		Glide.with(context).load(url).into(imageView);
+	}
 }

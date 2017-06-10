@@ -1,8 +1,8 @@
 package com.luismunyoz.marvelheroes.characterdetail;
 
-import com.luismunyoz.marvelheroes.BaseContract;
-import com.luismunyoz.marvelheroes.data.Character;
-import com.luismunyoz.marvelheroes.data.Comic;
+import com.luismunyoz.marvelheroes.common.BaseContract;
+import com.luismunyoz.marvelheroes.data.models.Character;
+import com.luismunyoz.marvelheroes.data.models.Comic;
 
 import java.util.List;
 

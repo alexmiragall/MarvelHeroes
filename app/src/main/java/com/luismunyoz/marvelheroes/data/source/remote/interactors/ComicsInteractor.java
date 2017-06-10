@@ -1,7 +1,7 @@
 package com.luismunyoz.marvelheroes.data.source.remote.interactors;
 
 
-import com.luismunyoz.marvelheroes.data.Comic;
+import com.luismunyoz.marvelheroes.data.models.Comic;
 
 import java.util.List;
 
@@ -11,10 +11,11 @@ import java.util.List;
 
 public interface ComicsInteractor {
 
-    interface ComicsInteractorCallback {
-        void onComicsDownloaded(List<Comic> comics);
-        void onComicsDownloadError(Integer status, String error);
-    }
+	interface ComicsInteractorCallback {
+		void onComicsDownloaded(List<Comic> comics);
 
-    public void execute(String characterID, Integer limit, Integer offset, ComicsInteractorCallback callback);
+		void onComicsDownloadError(Integer status, String error);
+	}
+
+	void execute(String characterID, Integer limit, Integer offset, ComicsInteractorCallback callback);
 }

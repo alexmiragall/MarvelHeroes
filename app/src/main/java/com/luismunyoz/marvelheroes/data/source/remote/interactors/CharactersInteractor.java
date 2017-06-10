@@ -1,7 +1,8 @@
 package com.luismunyoz.marvelheroes.data.source.remote.interactors;
 
 import java.util.List;
-import com.luismunyoz.marvelheroes.data.Character;
+
+import com.luismunyoz.marvelheroes.data.models.Character;
 
 /**
  * Created by Luism on 02/04/2017.
@@ -9,10 +10,11 @@ import com.luismunyoz.marvelheroes.data.Character;
 
 public interface CharactersInteractor {
 
-    interface CharactersInteractorCallback {
-        void onCharactersDownloaded(List<Character> characters);
-        void onCharactersDownloadError(Integer status, String error);
-    }
+	interface CharactersInteractorCallback {
+		void onCharactersDownloaded(List<Character> characters);
 
-    public void execute(Integer limit, Integer offset, CharactersInteractorCallback callback);
+		void onCharactersDownloadError(Integer status, String error);
+	}
+
+	void execute(Integer limit, Integer offset, CharactersInteractorCallback callback);
 }

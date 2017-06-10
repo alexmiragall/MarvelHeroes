@@ -1,4 +1,4 @@
-package com.luismunyoz.marvelheroes;
+package com.luismunyoz.marvelheroes.common;
 
 /**
  * Created by luis on 19/05/17.

@@ -1,7 +1,6 @@
 package com.luismunyoz.marvelheroes.characterdetail;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.luismunyoz.marvelheroes.R;
-import com.luismunyoz.marvelheroes.data.Character;
-import com.luismunyoz.marvelheroes.data.Comic;
+import com.luismunyoz.marvelheroes.data.models.Character;
+import com.luismunyoz.marvelheroes.data.models.Comic;
 import com.luismunyoz.marvelheroes.databinding.FragmentCharacterDetailBinding;
 
 import java.util.List;
@@ -32,97 +31,97 @@ import butterknife.Unbinder;
 
 public class CharacterDetailFragment extends Fragment implements CharacterDetailContract.View, CharacterComicsAdapter.Listener {
 
-    @BindView(R.id.main_toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.character_comic_list)
-    RecyclerView comicList;
-    @BindView(R.id.character_comic_loading)
-    ProgressBar comicLoading;
+	@BindView(R.id.main_toolbar)
+	Toolbar toolbar;
+	@BindView(R.id.character_comic_list)
+	RecyclerView comicList;
+	@BindView(R.id.character_comic_loading)
+	ProgressBar comicLoading;
 
-    private Unbinder unbinder;
-    private CharacterDetailContract.Presenter presenter;
-    private FragmentCharacterDetailBinding binding;
-    private CharacterComicsAdapter comicsAdapter;
+	private Unbinder unbinder;
+	private CharacterDetailContract.Presenter presenter;
+	private FragmentCharacterDetailBinding binding;
+	private CharacterComicsAdapter comicsAdapter;
 
-    public CharacterDetailFragment(){
+	public CharacterDetailFragment() {
 
-    }
+	}
 
-    public static CharacterDetailFragment newInstance() {
-        CharacterDetailFragment characterDetailFragment = new CharacterDetailFragment();
-        return characterDetailFragment;
-    }
+	public static CharacterDetailFragment newInstance() {
+		CharacterDetailFragment characterDetailFragment = new CharacterDetailFragment();
+		return characterDetailFragment;
+	}
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_character_detail, container, false);
-        View view = binding.getRoot();
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		binding = DataBindingUtil.inflate(inflater, R.layout.fragment_character_detail, container, false);
+		View view = binding.getRoot();
 
-        unbinder = ButterKnife.bind(this, view);
+		unbinder = ButterKnife.bind(this, view);
 
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+		((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        comicsAdapter = new CharacterComicsAdapter(R.layout.layout_comic_item, this);
-        comicList.setNestedScrollingEnabled(false);
-        comicList.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
-        comicList.setAdapter(comicsAdapter);
+		comicsAdapter = new CharacterComicsAdapter(R.layout.layout_comic_item, this);
+		comicList.setNestedScrollingEnabled(false);
+		comicList.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
+		comicList.setAdapter(comicsAdapter);
 
-        return view;
-    }
+		return view;
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.start();
-    }
+	@Override
+	public void onResume() {
+		super.onResume();
+		presenter.start();
+	}
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		unbinder.unbind();
+	}
 
-    @Override
-    public void setPresenter(CharacterDetailContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
+	@Override
+	public void setPresenter(CharacterDetailContract.Presenter presenter) {
+		this.presenter = presenter;
+	}
 
-    @Override
-    public void showLoading(boolean active) {
+	@Override
+	public void showLoading(boolean active) {
 
-    }
+	}
 
-    @Override
-    public void showErrorLoadingCharacter() {
+	@Override
+	public void showErrorLoadingCharacter() {
 
-    }
+	}
 
-    @Override
-    public void showComics(List<Comic> comics) {
-        comicsAdapter.setComics(comics);
-    }
+	@Override
+	public void showComics(List<Comic> comics) {
+		comicsAdapter.setComics(comics);
+	}
 
-    @Override
-    public void showComicLoading(boolean loading) {
-        if(comicLoading != null) {
-            comicLoading.setVisibility(loading ? View.VISIBLE : View.GONE);
-        }
-    }
+	@Override
+	public void showComicLoading(boolean loading) {
+		if (comicLoading != null) {
+			comicLoading.setVisibility(loading ? View.VISIBLE : View.GONE);
+		}
+	}
 
-    @Override
-    public void showComicEmptyList() {
+	@Override
+	public void showComicEmptyList() {
 
-    }
+	}
 
-    @Override
-    public void showCharacter(Character character) {
-        binding.setCharacter(character);
-    }
+	@Override
+	public void showCharacter(Character character) {
+		binding.setCharacter(character);
+	}
 
-    @Override
-    public void onClickComic(Comic comic) {
+	@Override
+	public void onClickComic(Comic comic) {
 
-    }
+	}
 }

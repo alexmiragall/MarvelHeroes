@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.luismunyoz.marvelheroes.R;
 import com.luismunyoz.marvelheroes.characterdetail.CharacterDetailActivity;
-import com.luismunyoz.marvelheroes.data.Character;
+import com.luismunyoz.marvelheroes.data.models.Character;
 import com.luismunyoz.marvelheroes.ui.EndlessRecyclerViewScrollListener;
 
 import java.util.ArrayList;
@@ -28,96 +28,96 @@ import butterknife.Unbinder;
 
 public class CharactersFragment extends Fragment implements CharactersContract.View, CharactersAdapter.Listener {
 
-    @BindView(R.id.characters_list)
-    RecyclerView list;
+	@BindView(R.id.characters_list)
+	RecyclerView list;
 
-    private Unbinder unbinder;
-    private CharactersContract.Presenter presenter;
-    private List<Character> characters;
-    private CharactersAdapter adapter;
+	private Unbinder unbinder;
+	private CharactersContract.Presenter presenter;
+	private List<Character> characters;
+	private CharactersAdapter adapter;
 
-    public CharactersFragment() {
-    }
+	public CharactersFragment() {
+	}
 
-    public static CharactersFragment newInstance(){
-        CharactersFragment fragment = new CharactersFragment();
-        return fragment;
-    }
+	public static CharactersFragment newInstance() {
+		CharactersFragment fragment = new CharactersFragment();
+		return fragment;
+	}
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        characters = new ArrayList<>();
-    }
+		characters = new ArrayList<>();
+	}
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_characters, container, false);
-        unbinder = ButterKnife.bind(this, view);
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_characters, container, false);
+		unbinder = ButterKnife.bind(this, view);
 
-        adapter = new CharactersAdapter(characters, R.layout.layout_character_item, this);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false);
-        list.setLayoutManager(gridLayoutManager);
-        list.setAdapter(adapter);
-        list.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                presenter.onLoadMore();
-            }
-        });
+		adapter = new CharactersAdapter(characters, R.layout.layout_character_item, this);
+		GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false);
+		list.setLayoutManager(gridLayoutManager);
+		list.setAdapter(adapter);
+		list.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+				presenter.onLoadMore();
+			}
+		});
 
-        return view;
-    }
+		return view;
+	}
 
-    @Override
-    public void setPresenter(CharactersContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
+	@Override
+	public void setPresenter(CharactersContract.Presenter presenter) {
+		this.presenter = presenter;
+	}
 
-    @Override
-    public void showLoading(boolean active) {
+	@Override
+	public void showLoading(boolean active) {
 
-    }
+	}
 
-    @Override
-    public void showCharacters(List<Character> characters) {
-        this.characters = characters;
-        adapter.setItems(characters);
-    }
+	@Override
+	public void showCharacters(List<Character> characters) {
+		this.characters = characters;
+		adapter.setItems(characters);
+	}
 
-    @Override
-    public void showEmptyList() {
+	@Override
+	public void showEmptyList() {
 
-    }
+	}
 
-    @Override
-    public void showErrorLoading() {
+	@Override
+	public void showErrorLoading() {
 
-    }
+	}
 
-    @Override
-    public void openCharacterDetails(Character character) {
-        Intent i = new Intent(getActivity(), CharacterDetailActivity.class);
-        i.putExtra(CharacterDetailActivity.ARG_CHARACTERID, character.getId());
-        startActivity(i);
-    }
+	@Override
+	public void openCharacterDetails(Character character) {
+		Intent i = new Intent(getActivity(), CharacterDetailActivity.class);
+		i.putExtra(CharacterDetailActivity.ARG_CHARACTERID, character.getId());
+		startActivity(i);
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.start();
-    }
+	@Override
+	public void onResume() {
+		super.onResume();
+		presenter.start();
+	}
 
-    @Override
-    public void onClickCharacter(Character character) {
-        presenter.onCharacterClicked(character);
-    }
+	@Override
+	public void onClickCharacter(Character character) {
+		presenter.onCharacterClicked(character);
+	}
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		unbinder.unbind();
+	}
 }

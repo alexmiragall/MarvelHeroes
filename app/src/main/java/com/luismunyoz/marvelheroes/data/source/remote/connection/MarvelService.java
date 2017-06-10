@@ -2,8 +2,8 @@ package com.luismunyoz.marvelheroes.data.source.remote.connection;
 
 import android.support.annotation.Nullable;
 
-import com.luismunyoz.marvelheroes.data.Comic;
-import com.luismunyoz.marvelheroes.data.Character;
+import com.luismunyoz.marvelheroes.data.models.Comic;
+import com.luismunyoz.marvelheroes.data.models.Character;
 import com.luismunyoz.marvelheroes.data.source.remote.connection.responses.BaseResponse;
 
 import retrofit2.Call;
@@ -17,12 +17,12 @@ import retrofit2.http.Query;
 
 public interface MarvelService {
 
-    @GET("/v1/public/characters")
-    Call<BaseResponse<Character>> getCharacters(@Nullable @Query("limit") Integer limit, @Nullable @Query("offset") Integer offset);
+	@GET("/v1/public/characters")
+	Call<BaseResponse<Character>> getCharacters(@Nullable @Query("limit") Integer limit, @Nullable @Query("offset") Integer offset);
 
-    @GET("/v1/public/characters/{id}")
-    Call<BaseResponse<Character>> getCharacter(@Path("id") String id);
+	@GET("/v1/public/characters/{id}")
+	Call<BaseResponse<Character>> getCharacter(@Path("id") String id);
 
-    @GET("/v1/public/characters/{id}/comics")
-    Call<BaseResponse<Comic>> getComicsByCharacter(@Path("id") String characterId, @Nullable @Query("limit") Integer limit, @Nullable @Query("offset") Integer offset);
+	@GET("/v1/public/characters/{id}/comics")
+	Call<BaseResponse<Comic>> getComicsByCharacter(@Path("id") String characterId, @Nullable @Query("limit") Integer limit, @Nullable @Query("offset") Integer offset);
 }

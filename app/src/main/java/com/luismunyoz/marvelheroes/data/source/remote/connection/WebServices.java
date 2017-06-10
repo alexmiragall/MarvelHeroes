@@ -1,7 +1,5 @@
 package com.luismunyoz.marvelheroes.data.source.remote.connection;
 
-import android.content.Context;
-
 import com.luismunyoz.marvelheroes.BuildConfig;
 
 import okhttp3.OkHttpClient;
@@ -13,26 +11,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by luis on 02/04/16.
  */
 public class WebServices {
-    private Retrofit retrofit;
+	private Retrofit retrofit;
 
-    public WebServices(Context context){
+	public WebServices() {
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+		HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+		interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .addInterceptor(new AuthInterceptor())
-                .build();
+		OkHttpClient client = new OkHttpClient.Builder()
+				.addInterceptor(interceptor)
+				.addInterceptor(new AuthInterceptor())
+				.build();
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-    }
+		retrofit = new Retrofit.Builder()
+				.baseUrl(BuildConfig.BASE_URL)
+				.client(client)
+				.addConverterFactory(GsonConverterFactory.create())
+				.build();
+	}
 
-    public MarvelService getService(){
-        return retrofit.create(MarvelService.class);
-    }
+	public MarvelService getService() {
+		return retrofit.create(MarvelService.class);
+	}
 }

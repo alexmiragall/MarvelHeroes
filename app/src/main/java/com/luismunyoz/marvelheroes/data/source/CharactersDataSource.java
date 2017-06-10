@@ -1,7 +1,7 @@
 package com.luismunyoz.marvelheroes.data.source;
 
-import com.luismunyoz.marvelheroes.data.Character;
-import com.luismunyoz.marvelheroes.data.Comic;
+import com.luismunyoz.marvelheroes.data.models.Character;
+import com.luismunyoz.marvelheroes.data.models.Comic;
 
 import java.util.List;
 
@@ -11,24 +11,27 @@ import java.util.List;
 
 public interface CharactersDataSource {
 
-    void getCharacters(Integer limit, Integer offset, GetCharactersCallback callback);
+	void getCharacters(Integer limit, Integer offset, GetCharactersCallback callback);
 
-    void getCharacter(Long characterId, GetCharacterCallback callback);
+	void getCharacter(Long characterId, GetCharacterCallback callback);
 
-    void getCharacterComics(Long characterId, Integer limit, Integer offset, GetCharacterComicsCallback callback);
+	void getCharacterComics(Long characterId, Integer limit, Integer offset, GetCharacterComicsCallback callback);
 
-    interface GetCharactersCallback {
-        void onCharactersLoaded(List<Character> characters);
-        void onCharactersLoadError();
-    }
+	interface GetCharactersCallback {
+		void onCharactersLoaded(List<Character> characters);
 
-    interface GetCharacterCallback {
-        void onCharacterLoaded(Character character);
-        void onCharacterLoadError();
-    }
+		void onCharactersLoadError();
+	}
 
-    interface GetCharacterComicsCallback {
-        void onCharacterComicsLoaded(List<Comic> comics);
-        void onCharacterComicsLoadError();
-    }
+	interface GetCharacterCallback {
+		void onCharacterLoaded(Character character);
+
+		void onCharacterLoadError();
+	}
+
+	interface GetCharacterComicsCallback {
+		void onCharacterComicsLoaded(List<Comic> comics);
+
+		void onCharacterComicsLoadError();
+	}
 }
