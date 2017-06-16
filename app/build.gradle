@@ -75,4 +75,5 @@ dependencies {
         exclude module: 'support-v4'
     }
     androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.1')
+    androidTestCompile 'junit:junit:4.12'
 }
